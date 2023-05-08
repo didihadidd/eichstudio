@@ -25,12 +25,12 @@
                     @method('PUT')
                     @csrf
                     <div class="form-group">
-                        <label for="title">Paket Travel</label>
-                        <select name="travel_packages_id" required class="form-control">
-                            <option value="{{ $item->travel_packages_id }}">Jangan Ubah</option> <!--travel_packages_id buat panggil data sebelumnya -->
-                            @foreach($travel_packages as $travel_package)
-                                <option value="{{ $travel_package->id }}">
-                                    {{ $travel_package->title }}
+                        <label for="title">Nama Talent</label>
+                        <select name="talents_id" required class="form-control">
+                            <option value="{{ $item->talents_id }}">Jangan Ubah</option> <!--travel_packages_id buat panggil data sebelumnya -->
+                            @foreach($talents as $talent)
+                                <option value="{{ $talent->id }}">
+                                    {{ $talent->title }}
                                 </option>
                             @endforeach
                         </select>

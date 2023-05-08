@@ -6,22 +6,24 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Gallery extends Model
+class Talent extends Model
 {
     use SoftDeletes;
 
+    public $table = "talents";
     // fillable = jd kita bs menyimpan secara langsung
     protected $fillable = [
-        'talents_id', 'image'
+        'title', 'slug', 'height', 'weight', 'status_hijab',
+        'schedule','price'
     ]; //sesuai table
 
     protected $hidden =[
 
     ];
 
-    //relasi antara galery dengan travel_package
-    public function talent(){
-        return $this->belongsTo( Talent::class, 'talents_id', 'id' );
-    } // data galeri punyanya travelPackage
+    public function galleries(){
+        return $this->hasMany( Gallery::class, 'talents_id', 'id' );  // menginformasikan bahwa travel package ini punya banyak galeri
+
+    }
 
 }

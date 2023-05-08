@@ -16,7 +16,7 @@ class TransactionController extends Controller
     public function index()
     {
         $items = Transaction::with([
-            'details', 'travel_package', 'user'
+            'details', 'talent', 'user'
         ])->get();
 
         return view('pages.admin.transaction.index',[
@@ -50,7 +50,7 @@ class TransactionController extends Controller
     public function show(string $id)
     {
         $item = Transaction::with([
-            'details', 'travel_package', 'user'
+            'details', 'talent', 'user'
         ])->findOrFail($id); ////ambil data sesuai relasi database
 
         return view('pages.admin.transaction.detail',[

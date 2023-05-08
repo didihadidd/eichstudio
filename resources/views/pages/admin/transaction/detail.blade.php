@@ -6,7 +6,7 @@
 
       <!-- Page Heading -->
       <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Detail Transaksi {{ $item->user->name }}</h1>
+        <h1 class="h3 mb-0 text-gray-800">Detail Transaksi {{ $item->user->email}}</h1>
       </div>
 
       <!-- Content Row -->
@@ -27,16 +27,16 @@
                         <td>{{ $item->id }}</td>
                     </tr>
                     <tr>
-                        <th>Paket Travel</th>
-                        <td>{{ $item->travel_package->title}}</td>
+                        <th>Nama Talent</th>
+                        <td>{{ $item->talent->title}}</td>
                     </tr>
                     <tr>
                         <th>Pembeli</th>
                         <td>{{ $item->user->name }}</td>
                     </tr>
                     <tr>
-                        <th>Additional Visa</th>
-                        <td>$0{{ $item->additional_visa }}</td>
+                        <th>Jumlah Item</th>
+                        <td>${{ $item->jumlah_item }}</td>
                     </tr>
                     <tr>
                         <th>Total Transaksi</th>
@@ -52,18 +52,20 @@
                             <table class="table table-bordered">
                                 <tr> <!--sesuai yg ada di halaman checkout -->
                                     <th>ID</th>
-                                    <th>Nama</th>
-                                    <th>Nationality</th>
-                                    <th>Visa</th>
-                                    <th>DOE Passport</th>
+                                    <th>Nama Brand</th>
+                                    <th>Email Brand</th>
+                                    <th>Jumlah Item</th>
+                                    <th>Deskripsi</th>
+                                    <th>Bukti Bayar</th>
                                 </tr>
                                 @foreach($item->details as $detail) <!-- jd dia checkout apa aja ketauan-->
                                     <tr>
                                         <td>{{ $detail->id }}</td>
-                                        <td>{{ $detail->username }}</td>
-                                        <td>{{ $detail->nationality }}</td>
-                                        <td>{{ $detail->is_visa ? '30 Days' : 'N/A' }}</td> <!--tenary function?? kalo isi visa adalah true maka masukin 30days kalo sebaliknya ditulisanya N/A -->
-                                        <td>{{ $detail->doe_passport }}</td>
+                                        <td>{{ $detail->nama_brand }}</td>
+                                        <td>{{ $detail->email }}</td>
+                                        <td>{{ $detail->jumlah_item }}</td>
+                                        <td>{{ $detail->deskripsi }}</td>
+                                        <td>{{ $detail->bukti_bayar }}</td>
                                     </tr>
                                 @endforeach
                             </table>

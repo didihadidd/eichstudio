@@ -3,21 +3,21 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\TravelPackageRequest;
-use App\Models\TravelPackage;
+use App\Http\Requests\Admin\TalentRequest;
+use App\Models\Talent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
-class TravelPackageController extends Controller
+class TalentController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $items = TravelPackage::all(); //karena mau ngambil semua data travel package
+        $items = Talent::all(); //karena mau ngambil semua data travel package
 
-         return view('pages.admin.travel-package.index',[
+         return view('pages.admin.talent.index',[
             'items' => $items
         ]);
     }
@@ -27,20 +27,20 @@ class TravelPackageController extends Controller
      */
     public function create()
     {
-        return view('pages.admin.travel-package.create');
+        return view('pages.admin.talent.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(TravelPackageRequest $request)
+    public function store(TalentRequest $request)
     {
         $data = $request->all();
         $data['slug'] = Str::slug($request->title); //ngekonversi title menjadi slug yg bs dibaca oleh id
 
         //panggil modelnya
-        TravelPackage::create($data); //ambil data dr request & tambahan slug
-        return redirect()->route('travel-package.index');
+        Talent::create($data); //ambil data dr request & tambahan slug
+        return redirect()->route('data-talent.index');
     }
 
     /**
@@ -56,8 +56,8 @@ class TravelPackageController extends Controller
      */
     public function edit(string $id)
     {
-        $item = TravelPackage::findOrFail($id); // findOrFail = jika datanya ada akan dimunculin, jd gaada akan 404
-        return view('pages.admin.travel-package.edit',[
+        $item = Talent::findOrFail($id); // findOrFail = jika datanya ada akan dimunculin, jd gaada akan 404
+        return view('pages.admin.talent.edit',[
             'item' => $item
         ]);
     }
@@ -65,16 +65,16 @@ class TravelPackageController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(TravelPackageRequest $request, string $id) // buat validasi hrs isi form
+    public function update(TalentRequest $request, string $id) // buat validasi hrs isi form
     {
         $data = $request->all();
         $data['slug'] = Str::slug($request->title);
 
-        $item = TravelPackage::findOrFail($id);
+        $item = Talent::findOrFail($id);
 
         $item->update($data);
 
-        return redirect()->route('travel-package.index');
+        return redirect()->route('data-talent.index');
     }
 
     /**
@@ -82,9 +82,9 @@ class TravelPackageController extends Controller
      */
     public function destroy(string $id)
     {
-        $item = TravelPackage::findorFail($id);
+        $item = Talent::findorFail($id);
         $item->delete();
 
-        return redirect()->route('travel-package.index');
+        return redirect()->route('data-talent.index');
     }
 }

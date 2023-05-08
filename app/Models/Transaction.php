@@ -12,7 +12,7 @@ class Transaction extends Model
 
     // fillable = jd kita bs menyimpan secara langsung
     protected $fillable = [
-        'travel_packages_id', 'users_id', 'additional_visa',
+        'talents_id', 'users_id',
         'transactional_total', 'transaction_status'
     ]; //sesuai table
 
@@ -27,8 +27,8 @@ class Transaction extends Model
 
 
     //relasi travel_packages u/ melihat travel packages yg dipilih
-    public function travel_package(){
-        return $this->belongsTo( TravelPackage::class, 'travel_packages_id', 'id' );
+    public function talent(){
+        return $this->belongsTo( Talent::class, 'talents_id', 'id' );
     }
 
     //relasi user u/siapa yg mendaftar si travel packages ini

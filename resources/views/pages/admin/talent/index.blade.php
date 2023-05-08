@@ -6,9 +6,9 @@
 
       <!-- Page Heading -->
       <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Paket Travel</h1>
-        <a href="{{ route('travel-package.create') }}" class="btn btn-sn btn-primary shadow-sn">
-          <i class="fas fa-plus fa-sn text-white-50"></i> Tambah Paket Travel
+        <h1 class="h3 mb-0 text-gray-800">Data Talent Eich Studio</h1>
+        <a href="{{ route('data-talent.create') }}" class="btn btn-sn btn-primary shadow-sn">
+          <i class="fas fa-plus fa-sn text-white-50"></i> Tambah Data Talent
         </a>
       </div>
 
@@ -18,30 +18,33 @@
                   <table class="table table-bordered" width="100%" cellspacing="0">
                       <thead>
                           <tr>
-                            <th>ID</th>
-                            <th>Title</th>
-                            <th>Location</th>
-                            <th>Type</th>
-                            <th>Departure Date</th>
-                            <th>Type</th>
+
+                            <th>Nama Talent</th>
+                            <th>Tinggi</th>
+                            <th>Berat Badan</th>
+                            <th>Status Hijab</th>
+                            <th>Jadwal</th>
+                            <th>Harga Jasa /item</th>
                             <th>Action</th>
                           </tr>
                       </thead>
                       <tbody> <!--pake forselse untuk kondisi, munculin data kalo datanya ada tp kl gaada isinya kosong -->
                           @forelse ($items as $item)
                             <tr>
-                                <td>{{ $item->id }}</td>
+
                                 <td>{{ $item->title }}</td>
-                                <td>{{ $item->location }}</td>
-                                <td>{{ $item->type }}</td>
-                                <td>{{ $item->departure_date }}</td>
-                                <td>{{ $item->type }}</td>
+                                <td>{{ $item->height }} cm</td>
+                                <td>{{ $item->weight }} kg</td>
+                                <td>{{ $item->status_hijab }}</td>
+                                <td>{{ $item->schedule }}</td>
+                                <td>{{ $item->price }}</td>
+
 
                                 <td>
-                                    <a href="{{route('travel-package.edit', $item->id) }}" class="btn btn-info">
+                                    <a href="{{route('data-talent.edit', $item->id) }}" class="btn btn-info">
                                         <i class="fa fa-pencil-alt"></i>
                                     </a>
-                                    <form action="{{ route('travel-package.destroy', $item->id) }}" method="post" class="d-inline"> <!--pake inline biar tombol nya ga di garis baru -->
+                                    <form action="{{ route('data-talent.destroy', $item->id) }}" method="post" class="d-inline"> <!--pake inline biar tombol nya ga di garis baru -->
                                         @csrf
                                         @method('delete')
                                         <button class="btn btn-danger">

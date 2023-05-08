@@ -2,7 +2,7 @@
  <div class="container">
     <nav class="row navbar navbar-expand-lg navbar-light bg-white">
     <a class="navbar-brand" href="{{url('/')}}">
-        <img src="{{url('frontend/images/logo.png')}}" alt="" />
+        <img src="{{url('frontend/images/logoeich3.png')}}" alt="" />
       </a>
       <button
         class="navbar-toggler navbar-toggler-right"
@@ -20,26 +20,12 @@
             <a class="nav-link active" href="#">Home</a>
           </li>
           <li class="nav-item mx-md-2">
-            <a class="nav-link" href="#">Paket Travel</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              id="navbardrop"
-              data-toggle="dropdown"
-            >
-              Services
-            </a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="#">Link 1</a>
-              <a class="dropdown-item" href="#">Link 2</a>
-              <a class="dropdown-item" href="#">Link 3</a>
-            </div>
+            <a class="nav-link" href="#">Filtering Kriteria</a>
           </li>
           <li class="nav-item mx-md-2">
-            <a class="nav-link" href="#">Testimonial</a>
+            <a class="nav-link" href="#">History</a>
           </li>
+
         </ul>
 
 

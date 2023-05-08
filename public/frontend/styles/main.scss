@@ -21,18 +21,18 @@ body {
 .navbar-light {
   .navbar-nav {
     .nav-link {
-      color: #071C4D;
+      color: #8F7756;
 
-      &.active { 
+      &.active {
         font-weight: bold;
-        color: #071C4D !important;
+        color: #8F7756 !important;
       } // kelas aktif dari nav link li
     }
   }
 }
 
 .btn-login {
-  background-color: #071C4D;
+  background-color: #8F7756;
   color: #fff;
 
   &:hover {
@@ -40,11 +40,11 @@ body {
   }
 }
 
-//Header
+//Header`
 header{
     margin-top: -68px;
     padding: 180px 0 165px;
-    background-image: url('../images/header-logo.jpg');
+    background-image: url('../images/header_eich.jpeg');
     background-size: cover;
 
     h1,p {
@@ -96,20 +96,20 @@ header{
 
 //popular
 .section-popular {
-  min-height: 540px;
-  background: #051334;
+  min-height: 400px;
+  background: #8F7756;
   margin-top: -50px;
   margin-bottom: -230px;
 
   .section-popular-heading{
-    margin-top: 150px;
+    margin-top: 70px;
 
     h2,p{
       color: #fff;
     }
 
     h2{
-      font-family: 'Playfair Display', 
+      font-family: 'Playfair Display',
       serif;
       font-weight: bold;
       font-size: 40px;
@@ -136,13 +136,13 @@ header{
 
     .travel-country{
       font-size: 18px;
-      color: #fff;
+      color: #000;
     }
     .travel-location{
       font-size: 26px;
-      color: #fff;
+      color: #000;
     }
-    
+
     .travel-button{
       .btn-travel-details{
         background-color: #ff9e53;
@@ -200,7 +200,7 @@ header{
       font-size: 18px;
     }
   }
-    
+
   .section-testimonial-content{
     margin-top: -300px;
     padding-bottom: 50px;
@@ -209,7 +209,7 @@ header{
       padding: 40px 20px 10px;
       border-radius: 11px;
       margin-bottom: 20px;
-    
+
 
     .testimonial-content{
       min-height: 380px;
@@ -314,7 +314,7 @@ header{
         font-size: 18px;
         color: #071c4d;
       }
-      
+
       td{
         font-weight: 300;
         font-size: 18px;
@@ -355,7 +355,7 @@ header{
     color: #fff;
     }
   }
-  
+
   .text-blue{
     font-weight: bold;
     color: #071c4d;
@@ -365,7 +365,7 @@ header{
     font-weight: bold;
     color: #ff9e53;
   }
-  
+
   .payment-instruction{
     font-weight: 300;
     font-size: 14px;
@@ -453,7 +453,7 @@ header{
       margin-left: 10px;
       overflow: hidden;
       float: left;
-      
+
     }
 
     .features-image {

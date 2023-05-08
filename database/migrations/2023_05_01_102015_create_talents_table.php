@@ -11,12 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('galleries', function (Blueprint $table) {
+        Schema::create('talents', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('talents_id'); //ini yg mau direlasiin
-            $table->text('image'); //ini biar gambarnya masuk ke folder tp connect jg ke db, kalo image di db bakal berat dbnya
+            $table->string('title');
+            $table->string('slug');
+            $table->integer('height');
+            $table->integer('weight');
+            $table->string('status_hijab');
+            $table->date('schedule');
+            $table->integer('price');
             $table->softDeletes();
             $table->timestamps();
+
         });
     }
 
@@ -25,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('galleries');
+        Schema::dropIfExists('talents');
     }
 };

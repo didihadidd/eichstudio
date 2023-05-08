@@ -6,7 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DetailController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\Admin\TravelPackageController;
-use App\Http\Controllers\Admin\TransactionController;
+use App\Http\Controllers\Admin\TalentController;
 
 
 /*
@@ -22,6 +22,9 @@ use App\Http\Controllers\Admin\TransactionController;
 Route::get('/', [HomeController::class, 'index'])
 ->name('home'); //ga kepake krn udh ditambah dr roles middleware
 
+//Route::get('/detail/{slug}', [DetailController::class, 'index'])
+ //   ->name('detail');
+
 Route::get('/detail/{slug}', [DetailController::class, 'index'])
     ->name('detail');
 
@@ -35,7 +38,8 @@ Route::prefix('admin')
         Route::get('/', [DashboardController::class, 'index'])
             ->name('dashboard');
 
-        Route::resource('travel-package', '\App\Http\Controllers\Admin\TravelPackageController');
+        //Route::resource('travel-package', '\App\Http\Controllers\Admin\TravelPackageController');
+        Route::resource('data-talent', '\App\Http\Controllers\Admin\TalentController');
         Route::resource('gallery', '\App\Http\Controllers\Admin\GalleryController');
         Route::resource('transaction', '\App\Http\Controllers\Admin\TransactionController');
         });
@@ -46,9 +50,9 @@ Route::prefix('admin')
 //Route::get('/checkout/success', [CheckoutController::class, 'success'])
 //     ->name('checkout-success');
 
-Route::post('/checkout/{id}', [CheckoutController::class, 'process']) //pake post karena kita mengirim data
-    ->name('checkout_process')
-    ->middleware(['auth','verified']);
+// Route::post('/checkout/{id}', [CheckoutController::class, 'process']) //pake post karena kita mengirim data
+//     ->name('checkout_process')
+//     ->middleware(['auth','verified']);
 
 Route::get('/checkout/{id}', [CheckoutController::class, 'index']) //pake parameter {id} = u/ memproses data dari si checkout itu sendiri
     ->name('checkout') //{detail_id}

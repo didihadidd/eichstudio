@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Detail Travel')
+@section('title', 'Detail Talent')
 
 @section('content')
 <main>
@@ -12,7 +12,7 @@
               <nav>
                 <ol class="breadcrumb"> <!-- breadcrumb itu tulisan yg Paket Travel/Details-->
                   <li class="breadcrumb-item ">
-                    Paket Travel
+                    Talent
                   </li>
                   <li class="breadcrumb-item active">
                     Details
@@ -27,7 +27,10 @@
               <div class="card card-detail">
                 <h1>{{ $item->title }}</h1>
                 <p>
-                    {{ $item->location }}
+                    {{ $item->height}} cm | {{$item->weight}} kg | {{$item-> status_hijab}}
+                </p>
+                <p>
+                    Jadwal Terdekat : {{ $item->schedule}}
                 </p>
                 @if($item->galleries->count() > 0)
                 <div class="gallery">
@@ -56,94 +59,43 @@
 
 
 
-                  <h2>Tentang Wisata</h2>
-                  {!! $item->about !!}
-                  <div class="features row">
-                    <div class="col-md-4">
-                        <img
-                          src="{{ url('frontend/images/ic_event.png') }}"
-                          alt=""
-                          class="features-image"
-                        />
-                        <div class="description">
-                          <h3>Featured Event</h3>
-                          <p>{{ $item->featured_event }}</p>
-                        </div>
-                      </div>
-
-                      <div class="col-md-4 border-left">
-                        <div class="description">
-                          <img
-                            src="{{ url('frontend/images/ic_bahasa.png') }}"
-                            alt=""
-                            class="features-image"
-                          />
-                          <div class="description">
-                            <h3>Language</h3>
-                            <p>{{ $item->language }}</p>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="col-md-4 border-left">
-                        <div class="description">
-                          <img
-                            src="{{ url('frontend/images/ic_foods.png') }}"
-                            alt=""
-                            class="features-image"
-                          />
-                          <div class="description">
-                            <h3>Foods</h3>
-                            <p>{{ $item->foods }}</p>
-                          </div>
-                        </div>
-                      </div>
-
-                  </div>
+                  <h1>Harga/ 1 pcs product</h1>
+                  <h1>{!! $item->price !!}<h1>
                 </div>
             </div>
 
             <div class="col lg-4">
               <div class="card card-detail card-right">
-                <h2>Members are going</h2>
-                <div class="members my-2">
-                  <img src="{{ url('frontend/images/avatar-2.png') }}"
-                  class="member-image mr-1"/>
-                  <img src="{{ url('frontend/images/avatar-2.png ') }}"
-                  class="member-image mr-1"/>
-                  <img src=" {{ url('frontend/images/avatar-2.png ') }}"
-                  class="member-image mr-1"/>
-                  <img src=" {{ url('frontend/images/avatar-2.png ') }}"
-                  class="member-image mr-1"/>
-                  <img src="" {{ url('frontend/images/avatar-2.png ') }}"
-                  class="member-image mr-1"/>
-                </div>
-
-                <hr>
-                <h2>Trip information</h2>
+                <h2>Detail Talent Information</h2>
                 <table class="trip-informations">
                   <tr>
-                    <th width="50%">Date of Departure</th> <!-- Table heading-->
+                    <th width="50%">Jadwal Terdekat</th> <!-- Table heading-->
                     <td width="50%" class="text-right">
-                        {{ \Carbon\Carbon::create($item->date_of_departure)->format('F n, Y') }}
+                        {{ \Carbon\Carbon::create($item->schedule)->format('F n, Y') }}
                     </td> <!--Table data-->
                   </tr>
                   <tr>
-                    <th width="50%">Duration</th>
+                    <th width="50%">Tinggi Badan</th>
                     <td width="50%" class="text-right">
-                      {{ $item->duration }}
+                      {{ $item->height }} cm
                     </td>
                   </tr>
                   <tr>
-                    <th width="50%">Type</th> <!-- Table heading-->
+                    <th width="50%">Berat badan</th> <!-- Table heading-->
                     <td width="50%" class="text-right">
-                        {{ $item->type }}
+                        {{ $item->weight }} kg
                     </td> <!--Table data-->
                   </tr>
                   <tr>
-                    <th width="50%">Price</th> <!-- Table heading-->
+                    <th width="50%">Detail Hijab</th> <!-- Table heading-->
                     <td width="50%" class="text-right">
-                        ${{ $item->price }} / person
+                        {{ $item->status_hijab }}
+                    </td> <!--Table data-->
+                  </tr>
+                  <tr>
+                    <th width="50%">Harga Jasa /item</th> <!-- Table heading-->
+                    <td width="50%" class="text-right">
+                        ${{ $item->price }} / pcs
                     </td> <!--Table data-->
                   </tr>
                 </table>
@@ -151,10 +103,10 @@
 
               <div class="join-container">
                 @auth
-                <form action="{{ route('checkout_process', $item->id) }}" method="post">
-                    @csrf
+                <form action="{{ route('checkout', $item->id) }}">
+
                     <button class="btn btn-block btn-join-now mt-3 py-2" type="submit">
-                        Join Now
+                        Order Now
                     </button>
                 </form>
                 @endauth

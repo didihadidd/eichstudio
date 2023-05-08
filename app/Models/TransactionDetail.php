@@ -12,7 +12,7 @@ class TransactionDetail extends Model
 
     // fillable = jd kita bs menyimpan secara langsung
     protected $fillable = [
-        'transactions_id', 'username', 'nationality', 'is_visa', 'doe_passport'
+        'transactions_id', 'nama_brand', 'email', 'jumlah_item', 'description', 'bukti_bayar'
     ]; //sesuai table
 
     protected $hidden =[

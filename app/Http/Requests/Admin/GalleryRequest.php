@@ -6,6 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class GalleryRequest extends FormRequest
 {
+    public $table = "galleries";
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -24,7 +25,7 @@ class GalleryRequest extends FormRequest
     public function rules()
     {
         return [
-            'travel_packages_id' => 'required|integer|exists:travel_packages,id', //data id travel_packages_id memang ada di tabel travel_packages
+            'talents_id' => 'required|integer|exists:talents,id', //data id travel_packages_id memang ada di tabel travel_packages
             'image' => 'required|image',
         ];
     }

@@ -14,10 +14,11 @@ return new class extends Migration
         Schema::create('transaction_details', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('transactions_id');
-            $table->string('username');
-            $table->string('nationality');
-            $table->boolean('is_visa');
-            $table->date('doe_passport');
+            $table->string('nama_brand');
+            $table->string('email');
+            $table->integer('jumlah_item');
+            $table->longText('description');
+            $table->text('bukti_bayar'); //ini biar gambarnya masuk ke folder tp connect jg ke db, kalo image di db bakal berat dbnya
             $table->softDeletes();
             $table->timestamps();
         });

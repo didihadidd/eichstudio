@@ -74,9 +74,9 @@
       <div class="container">
         <div class="row page-login d-flex align-items-center">
           <div class="section-left col-12 col-md-6">
-            <h1 class="mb-4">We explore the new <br />life much better</h1>
+            <!-- <h1 class="mb-4">Eich Studio</h1> -->
             <img
-              src="/frontend/images/travel-4.jpg"
+              src="/frontend/images/headerlogin_eich.png"
               alt=""
               class="w-75 d-none d-sm-flex"
             />
@@ -85,11 +85,8 @@
             <div class="card">
               <div class="card-body">
                 <div class="text-center">
-                  <img
-                    src="/frontend/images/logo.png"
-                    alt=""
-                    class="w-50 mb-4"
-                  />
+               <h1>Login</h1>
+               <br>
                 </div>
                 <form method="POST" action="{{ route('login') }}">
                 @csrf

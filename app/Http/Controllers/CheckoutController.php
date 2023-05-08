@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Transaction;
 use App\Models\TransactionDetail;
-use App\Models\TravelPackage;
+use App\Models\Talent;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth; //buat masukin id user
 
@@ -14,7 +14,7 @@ class CheckoutController extends Controller
 {
     public function index(Request $request, $id) //tambahin id karena di route nya ada {id}
     {
-        $item = Transaction::with(['details','travel_package','user'])->findOrFail($id); //sesuai relasinya, findOrFail = kl ketemu dimunculkan kl gaketemu 404
+        $item = Transaction::with(['details','talent','user'])->findOrFail($id); //sesuai relasinya, findOrFail = kl ketemu dimunculkan kl gaketemu 404
 
         return view('pages.checkout',[
             'item' => $item //akan memunculkan data yg ada di atas
@@ -22,28 +22,28 @@ class CheckoutController extends Controller
     }
 
     //di process ini posisinya = dia masih dalam cart (transaction_statusnya akan jadi in_cart)
-    public function process(Request $request, $id) //tambahin id karena di route nya ada {id}
-    {
-        $travel_package = TravelPackage::findOrFail($id); //mau ambil data TravelPackage sesuai idnya
+    // public function process(Request $request, $id) //tambahin id karena di route nya ada {id}
+    // {
+    //     $talent = Talent::findOrFail($id); //mau ambil data TravelPackage sesuai idnya
 
-        $transaction = Transaction::create([
-            'travel_packages_id' => $id,
-            'users_id' => Auth::user()->id,
-            'additional_visa' => 0, //untuk user nantinya (default) visanya akan diisi 0
-            'transactional_total' => $travel_package->price, //menyesuaikan harganya dgn yg ada di travel_package (harga dr travel tsb)
-            'transaction_status' => 'IN_CART'
-        ]);
+    //     $transaction = Transaction::create([
+    //         'talents_id' => $id,
+    //         'users_id' => Auth::user()->id,
+    //         'transactional_total' => $talent->price , //menyesuaikan harganya dgn yg ada di travel_package (harga dr travel tsb)
+    //         'transaction_status' => 'IN_CART'
+    //     ]);
 
-        TransactionDetail::create([ //ada di modul integrasi bagian checkout I
-            'transactions_id' => $transaction->id,
-            'username' => Auth::user()->username,
-            'nationality' => 'ID',
-            'is_visa' => false, //di set defaultnya jd false
-            'doe_passport' => Carbon::now()->addYears(5)
-        ]);
+    //     TransactionDetail::create([ //ada di modul integrasi bagian checkout I
+    //         'transactions_id' => $transaction->id,
+    //         'email' => Auth::user()->email,
+    //         'nama_brand' => 'Nama Brand',
+    //         'jumlah_item' => 0,
+    //         'description' => 'Deskripsi',
+    //         'bukti_bayar' => false, //di set defaultnya jd false
+    //     ]);
 
-        return redirect()->route('checkout', $transaction->id);
-    }
+    //     return redirect()->route('checkout', $transaction->id);
+    // }
 
 
 
@@ -51,16 +51,16 @@ class CheckoutController extends Controller
     {
         $item = TransactionDetail::findorFail($detail_id); //mau ambil detail dr transaction_detail
 
-        $transaction = Transaction::with(['details','travel_package'])
+        $transaction = Transaction::with(['details','talent'])
             ->findOrFail($item->transactions_id);
 
-        if($item->is_visa)
+        if($item->jumlah_item)
         {
-            $transaction->transactional_total -= 190;
-            $transaction->additional_visa -= 190;
+            $transaction->transactional_total -= price;
+            // $transaction->additional_visa -= 190;
         }
 
-        $transaction->transactional_total -= $transaction->travel_package->price;
+        $transaction->transactional_total -= $transaction->talent->price;
 
         $transaction->save();
         $item->delete();
@@ -70,34 +70,63 @@ class CheckoutController extends Controller
 
     public function create(Request $request, $id) ////tambahin id karena di route nya ada {id}
     {
-        //akan memvalidasi data yg masuk dari user
-        $request->validate([
-            'username' => 'required|string|exists:users,username',
-            'is_visa' => 'required|boolean',
-            'doe_passport' => 'required',
+        $talent = Talent::findOrFail($id); //mau ambil data TravelPackage sesuai idnya
+
+        $transaction = Transaction::create([
+            'talents_id' => $id,
+            'users_id' => Auth::user()->id,
+            'transactional_total' => $talent->price , //menyesuaikan harganya dgn yg ada di travel_package (harga dr travel tsb)
+            'transaction_status' => 'IN_CART'
         ]);
 
-        //akan mengatur data yg akan kita masukin ke transaction_detail
-        $data = $request->all();
-        $data['transactions_id'] = $id;
+        TransactionDetail::create([ //ada di modul integrasi bagian checkout I
+            'transactions_id' => $transaction->id,
+            'email' => Auth::user()->email,
+            'nama_brand' => 'Nama Brand',
+            'jumlah_item' => 0,
+            'description' => 'Deskripsi',
+            'bukti_bayar' => false, //di set defaultnya jd false
+        ]);
 
-        TransactionDetail::create($data); //untuk insert , $data = isi dari request all & tambahan dr transaction_id
+        // return redirect()->route('checkout', $transaction->id);
 
-        $transaction = Transaction::with(['travel_package'])->find($id); //ngambil data transaction itu sendiri
+         //akan memvalidasi data yg masuk dari user
+         $request->validate([
+             //'username' => 'required|string|exists:users,username',
+             'email' => 'required|string|exists:users,email',
+             'nama_brand' => 'required|string',
+             'jumlah_item' => 'required|integer',
+             'nama_brand' => 'required|string',
+             'description' => 'required',
+             'bukti_bayar' => 'required|image',
+         ]);
 
-        //kan di dalam tabel ada total visa brp & total transaksi brp, berarti kl kita nambahin org kan kita hrs update jg visanya hrs bayar berapa nah ini ditambahin disini
-        if($request->is_visa)
-        {
-            $transaction->transactional_total += 190;
-            $transaction->additional_visa += 190;
-        }
+         //akan mengatur data yg akan kita masukin ke transaction_detail
+         $data = $request->all();
 
-        $transaction->transactional_total +=
-            $transaction->travel_package->price;
+        $data['image'] = $request->file('image')->store(
+            'assets/gallery', 'public'
+        );
+
+         $data['transactions_id'] = $id;
+
+         TransactionDetail::create($data); //untuk insert , $data = isi dari request all & tambahan dr transaction_id
+
+         $transaction = Transaction::with(['talent'])->find($id); //ngambil data transaction itu sendiri
+
+     //kan di dalam tabel ada total visa brp & total transaksi brp, berarti kl kita nambahin org kan kita hrs update jg visanya hrs bayar berapa nah ini ditambahin disini
+         if($request->jumlah_item)
+         {
+             $transaction->transactional_total += price;
+             // $transaction->additional_visa += 190;
+         }
+
+         $transaction->transactional_total +=
+             $transaction->talent->price;
 
         $transaction->save();
 
-        return redirect()->route('checkout', $id);
+         return redirect()->route('checkout', $id);
     }
 
     public function success(Request $request, $id) //tambahin id karena di route nya ada {id}

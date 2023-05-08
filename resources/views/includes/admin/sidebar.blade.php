@@ -4,7 +4,7 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('dashboard')}}">
                 <div class="sidebar-brand-text mx-3">
-                    Nomads Admin
+                    Eich Studio Admiin
                 </div>
             </a>
 
@@ -20,15 +20,15 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('travel-package.index') }}">
+                <a class="nav-link" href="{{ route('data-talent.index') }}">
                     <i class="fas fa-fw fa-hotel"></i>
-                    <span>Paket Travel</span></a>
+                    <span>Data Talent</span></a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link"href="{{ route('gallery.index') }}"> <!-- disesuain sm route yg ada di web.php -->
                     <i class="fas fa-fw fa-images"></i>
-                    <span>Galeri Travel</span></a>
+                    <span>Galeri Talent</span></a>
             </li>
 
             <li class="nav-item">
@@ -144,12 +144,7 @@
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
 
-            <!-- Sidebar Message -->
-            <div class="sidebar-card d-none d-lg-flex">
-                <img class="sidebar-card-illustration mb-2" src="backend/img/undraw_rocket.svg" alt="...">
-                <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
-                <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
-            </div>
+
 
         </ul>
         <!-- End of Sidebar -->
